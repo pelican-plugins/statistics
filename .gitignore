@@ -1,0 +1,7 @@
+.pdm-python
+.pdm-build
+pdm.lock
+.venv
+dist
+__pycache__
+*.pyc

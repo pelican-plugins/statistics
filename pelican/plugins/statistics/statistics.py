@@ -13,17 +13,23 @@ fk: Flesch-kincaid Grade Level
 
 """
 
-from pelican import signals
-from bs4 import BeautifulSoup
 import re
 from collections import Counter
 
-from .readability import *
+from pelican import signals
+from pelican.contents import Article, Page
+from pelican.generators import ArticlesGenerator, PagesGenerator
+from bs4 import BeautifulSoup
+
+from .readability import text_stats, flesch_index, flesch_kincaid_level
 
 
 def calculate_stats(instance):
+    """
+    Calculate the statistics for a given instance.
+    """
 
-    if instance._content is not None:
+    if type(instance) in (Article, Page) and instance._content is not None:
         stats = {}
         content = instance._content
 
@@ -64,8 +70,31 @@ def calculate_stats(instance):
         stats['fi'] = "{:.2f}".format(flesch_index(readability_stats))
         stats['fk'] = "{:.2f}".format(flesch_kincaid_level(readability_stats))
 
+        instance.statistics = stats
+        # For backward compatibility added the same in `stats` as well
         instance.stats = stats
 
 
+def run_plugin(generators):
+    """Run the Statistics plugin."""
+    for generator in generators:
+        if isinstance(generator, ArticlesGenerator):
+            for article in generator.articles:
+                calculate_stats(article)
+                for translation in article.translations:
+                    calculate_stats(translation)
+        elif isinstance(generator, PagesGenerator):
+            for page in generator.pages:
+                calculate_stats(page)
+                for translation in page.translations:
+                    calculate_stats(translation)
+
+
 def register():
-    signals.content_object_init.connect(calculate_stats)
+    """Register the Statistics plugin."""
+    try:
+        signals.all_generators_finalized.connect(run_plugin)
+    except AttributeError:
+        # NOTE: This results in #314 so shouldn't really be relied on
+        # https://github.com/getpelican/pelican-plugins/issues/314
+        signals.content_object_init.connect(calculate_stats)

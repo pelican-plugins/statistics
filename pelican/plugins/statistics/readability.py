@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
-
-# Adadpted from here: http://acdx.net/calculating-the-flesch-kincaid-level-in-python/
-# See here for details: http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test
+"""
+Adadpted from here: http://acdx.net/calculating-the-flesch-kincaid-level-in-python/
+See here for details: http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test
+"""
 
 from __future__ import division
 import re
 
 
 def mean(seq):
+    """Return the mean of a sequence."""
     return sum(seq) / len(seq)
 
 
 def syllables(word):
+    """Return the number of syllables in a word."""
     if len(word) <= 3:
         return 1
 
@@ -20,6 +23,7 @@ def syllables(word):
 
 
 def normalize(text):
+    """Normalize a text for readability"""
     terminators = ".!?:;"
     term = re.escape(terminators)
     text = re.sub(r"[^%s\sA-Za-z]+" % term, "", text)
@@ -28,6 +32,7 @@ def normalize(text):
 
 
 def text_stats(text, wc):
+    """Text stats"""
     text = normalize(text)
     stcs = [s.split(" ") for s in text.split(". ")]
     stcs = [s for s in stcs if len(s) >= 2]
@@ -43,6 +48,7 @@ def text_stats(text, wc):
 
 
 def flesch_index(stats):
+    """Flesch index"""
     stcs, words, sbls = stats
     if stcs == 0 or words == 0:
         return 0
@@ -50,6 +56,7 @@ def flesch_index(stats):
 
 
 def flesch_kincaid_level(stats):
+    """Flesch-Kincaid level"""
     stcs, words, sbls = stats
     if stcs == 0 or words == 0:
         return 0

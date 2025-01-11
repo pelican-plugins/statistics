@@ -1,0 +1,107 @@
+[project]
+name = "pelican-statistics"
+version = "0.0.0"
+description = "Pelican plugin that calculates post statistics such as word count, reading ease, and more."
+authors = [{name = "Pelican Dev Team", email = "authors@getpelican.com"}]
+license = {text = "AGPL-3.0"}
+readme = "README.md"
+keywords = ["pelican", "plugin", "statistics"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Framework :: Pelican",
+    "Framework :: Pelican :: Plugins",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = "~=3.9"
+dependencies = [
+    "pelican>=4.5",
+    "beautifulsoup4>=4.12",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pelican-plugins/statistics"
+"Issue Tracker" = "https://github.com/pelican-plugins/statistics/issues"
+"Changelog" = "https://github.com/pelican-plugins/statistics/blob/main/CHANGELOG.md"
+"Funding" = "https://donate.getpelican.com/"
+
+[project.optional-dependencies]
+markdown = ["markdown>=3.4"]
+
+[dependency-groups]
+lint = [
+    "invoke>=2.2",
+    "ruff>=0.9.1,<1.0.0",
+]
+test = [
+    "markdown>=3.4",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-sugar>=1.0",
+]
+
+[tool.pdm.build]
+source-includes = [
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+]
+includes = ["pelican/"]
+excludes = ["**/.DS_Store", "**/test_data/**", "tasks.py"]
+
+[tool.autopub]
+project-name = "Statistics"
+git-username = "botpub"
+git-email = "52496925+botpub@users.noreply.github.com"
+append-github-contributor = true
+
+[tool.ruff.lint]
+select = [
+  "B",   # flake8-bugbear
+  "BLE", # flake8-blind-except
+  "C4",  # flake8-comprehensions
+  "D",   # pydocstyle
+  "E",   # pycodestyle
+  "F",   # pyflakes
+  "I",   # isort
+  "ICN", # flake8-import-conventions
+  "ISC", # flake8-implicit-str-concat
+  "PGH", # pygrep-hooks
+  "PL",  # pylint
+  "RET", # flake8-return
+  "RUF", # ruff-specific rules
+  "SIM", # flake8-simplify
+  "T10", # flake8-debugger
+  "T20", # flake8-print
+  "TID", # flake8-tidy-imports
+  "TRY", # tryceratops
+  "UP",  # pyupgrade
+  "W",   # pycodestyle
+  "YTT", # flake8-2020
+]
+
+ignore = [
+  "D100",    # missing docstring in public module
+  "D104",    # missing docstring in public package
+  "D203",    # blank line before class docstring
+  "D213",    # multi-line docstring summary should start at the second line
+  "ISC001",  # disabled so `ruff format` works without warning
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-sort-within-sections = true
+known-first-party = ["pelican"]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
