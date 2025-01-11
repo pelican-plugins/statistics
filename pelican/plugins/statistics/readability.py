@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 """
 Adadpted from here: http://acdx.net/calculating-the-flesch-kincaid-level-in-python/
 See here for details: http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test
 """
 
-from __future__ import division
 import re
 
 

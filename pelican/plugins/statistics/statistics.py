@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Post Statistics
 ========================
@@ -49,8 +48,8 @@ def calculate_stats(instance):
         tmp = raw_text
 
         # Process the text to remove punctuation
-        drop = u'.,?!@#$%^&*()_+-=\|/[]{}`~:;\'\"‘’—…“”'
-        raw_text = raw_text.translate(dict((ord(c), u'') for c in drop))
+        drop = '.,?!@#$%^&*()_+-=\\|/[]{}`~:;\'\"‘’—…“”'
+        raw_text = raw_text.translate({ord(c): '' for c in drop})
 
         # Count the words in the text
         words = raw_text.lower().split()
@@ -67,8 +66,8 @@ def calculate_stats(instance):
 
         # Calculate Flesch-kincaid readbility stats
         readability_stats = stcs, words, sbls = text_stats(tmp, stats['wc'])
-        stats['fi'] = "{:.2f}".format(flesch_index(readability_stats))
-        stats['fk'] = "{:.2f}".format(flesch_kincaid_level(readability_stats))
+        stats['fi'] = f"{flesch_index(readability_stats):.2f}"
+        stats['fk'] = f"{flesch_kincaid_level(readability_stats):.2f}"
 
         instance.statistics = stats
         # For backward compatibility added the same in `stats` as well
