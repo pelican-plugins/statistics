@@ -1,12 +1,12 @@
 Statistics: A Plugin for Pelican
-====================================================
+================================
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/pelican-plugins/statistics/main.yml?branch=main)](https://github.com/pelican-plugins/statistics/actions)
 [![PyPI Version](https://img.shields.io/pypi/v/pelican-statistics)](https://pypi.org/project/pelican-statistics/)
 [![Downloads](https://img.shields.io/pypi/dm/pelican-statistics)](https://pypi.org/project/pelican-statistics/)
 ![License](https://img.shields.io/pypi/l/pelican-statistics?color=blue)
 
-Pelican plugin that calculates post statistics such as word count, reading ease, and more.
+Statistics is a Pelican plugin that calculates post statistics such as word count, reading ease, and more.
 
 Installation
 ------------
@@ -20,43 +20,43 @@ As long as you have not explicitly added a `PLUGINS` setting to your Pelican set
 Usage
 -----
 
-This plugin to calculate various statistics about a post and store them in an `article.statistics` dictionary:
+This plugin calculates various statistics about a post and stores them in an `article.statistics` dictionary:
 
-- `wc`: how many words
-- `read_mins`: how many minutes would it take to read this article, based on 250 wpm (http://en.wikipedia.org/wiki/Words_per_minute#Reading_and_comprehension)
-- `word_counts`: frquency count of all the words in the article; can be used for tag/word clouds
-- `fi`: Flesch-kincaid Index/ Reading Ease (see: http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests)
-- `fk`: Flesch-kincaid Grade Level
+- `wc`: the number of words in the article
+- `read_mins`: how many minutes it would take to read this article, based on 250 [WPM](https://en.wikipedia.org/wiki/Words_per_minute#Reading_and_comprehension)
+- `word_counts`: frequency count of all the words in the article — can be used for tag/word clouds
+- `fi`: [Flesch Reading Ease](https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests)
+- `fk`: Flesch–Kincaid Grade Level
 
-Example:
+`article.statistics` dictionary example:
 
 ```python
 {
     'wc': 2760,
     'fi': '65.94',
     'fk': '7.65',
-    'word_counts': Counter({u'to': 98, u'a': 90, u'the': 83, u'of': 50, ...}),
+    'word_counts': Counter({"to": 98, "a": 90, "the": 83, "of": 50, ...}),
     'read_mins': 12
 }
 ```
 
-This allows you to output these values in your templates, like this, for example:
+This `article.statistics` dictionary allows you to output these values in your templates. For example:
 
 ```html
 <p title="~{{ article.statistics['wc'] }} words">~{{ article.statistics['read_mins'] }} min read</p>
 <ul>
-    <li>Flesch-kincaid Index/ Reading Ease: {{ article.statistics['fi'] }}</li>
-    <li>Flesch-kincaid Grade Level: {{ article.statistics['fk'] }}</li>
+    <li>Flesch Reading Ease: {{ article.statistics['fi'] }}</li>
+    <li>Flesch–Kincaid Grade Level: {{ article.statistics['fk'] }}</li>
 </ul>
 ```
 
-The `word_counts` variable is a python `Counter` dictionary and looks something like this, with each unique word and it's frequency:
+The `word_counts` variable is a python `Counter` dictionary and looks something like the following, with each unique word and its frequency:
 
 ```python
-Counter({u'to': 98, u'a': 90, u'the': 83, u'of': 50, u'karma': 50, .....
+Counter({"to": 98, "a": 90, "the": 83, "of": 50, "karma": 50, .....
 ```
 
-and can be used to create a tag/word cloud for a post.
+This `word_counts` variable can be used to create a tag/word cloud for a post.
 
 Contributing
 ------------
