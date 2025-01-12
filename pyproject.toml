@@ -1,6 +1,6 @@
 [project]
 name = "pelican-statistics"
-version = "0.0.0"
+version = "1.0.0"
 description = "Pelican plugin that calculates post statistics such as word count, reading ease, and more."
 authors = [{name = "Pelican Dev Team", email = "authors@getpelican.com"}]
 license = {text = "AGPL-3.0"}
