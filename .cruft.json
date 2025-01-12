@@ -1,0 +1,28 @@
+{
+  "template": "https://github.com/getpelican/cookiecutter-pelican-plugin",
+  "commit": "1594dbb8e94dc4b28fadd9ab1a17c9e2ae2d61c7",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "plugin_name": "Statistics",
+      "repo_name": "statistics",
+      "package_name": "statistics",
+      "distribution_name": "pelican-statistics",
+      "version": "0.0.0",
+      "description": "Pelican plugin that calculates post statistics such as word count, reading ease, and more.",
+      "authors": "{name = \"Pelican Dev Team\", email = \"authors@getpelican.com\"}",
+      "keywords": "\"pelican\", \"plugin\", \"statistics\"",
+      "readme": "README.md",
+      "contributing": "CONTRIBUTING.md",
+      "license": "GNU Affero General Public License v3|AGPL-3.0",
+      "repo_url": "https://github.com/pelican-plugins/statistics",
+      "dev_status": "5 - Production/Stable",
+      "tests_exist": false,
+      "python_version": "~=3.9",
+      "pelican_version": ">=4.5",
+      "_template": "https://github.com/getpelican/cookiecutter-pelican-plugin",
+      "_commit": "1594dbb8e94dc4b28fadd9ab1a17c9e2ae2d61c7"
+    }
+  },
+  "directory": null
+}
